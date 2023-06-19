@@ -24,8 +24,8 @@ int
 __mtx_timedlock64 (mtx_t *restrict mutex,
                    const struct __timespec64 *restrict time_point)
 {
-  int err_code = __pthread_mutex_timedlock64 ((pthread_mutex_t *)mutex,
-                                              time_point);
+  int err_code = __pthread_mutex_clocklock64 ((pthread_mutex_t *) mutex,
+                                              CLOCK_REALTIME, time_point);
   return thrd_err_map (err_code);
 }
 

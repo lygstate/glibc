@@ -24,9 +24,9 @@ int
 __cnd_timedwait64 (cnd_t *restrict cond, mtx_t *restrict mutex,
                    const struct __timespec64 *restrict time_point)
 {
-  int err_code = __pthread_cond_timedwait64 ((pthread_cond_t *) cond,
+  int err_code = __pthread_cond_clockwait64 ((pthread_cond_t *) cond,
                                              (pthread_mutex_t *) mutex,
-                                             time_point);
+                                             CLOCK_REALTIME, time_point);
   return thrd_err_map (err_code);
 }
 

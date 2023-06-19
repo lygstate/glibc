@@ -20,9 +20,9 @@
 
 int
 mtx_timedlock (mtx_t *restrict mutex,
-	       const struct timespec *restrict time_point)
+               const struct timespec *restrict time_point)
 {
-  int err_code = __pthread_mutex_timedlock ((pthread_mutex_t *)mutex,
-					    time_point);
+  int err_code = __pthread_mutex_clocklock ((pthread_mutex_t *) mutex,
+                                            CLOCK_REALTIME, time_point);
   return thrd_err_map (err_code);
 }

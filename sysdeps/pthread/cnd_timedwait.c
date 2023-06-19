@@ -20,10 +20,10 @@
 
 int
 cnd_timedwait (cnd_t *restrict cond, mtx_t *restrict mutex,
-	       const struct timespec* restrict time_point)
+               const struct timespec *restrict time_point)
 {
-  int err_code = __pthread_cond_timedwait ((pthread_cond_t *) cond,
-					   (pthread_mutex_t *) mutex,
-					   time_point);
+  int err_code = __pthread_cond_clockwait ((pthread_cond_t *) cond,
+                                           (pthread_mutex_t *) mutex,
+                                           CLOCK_REALTIME, time_point);
   return thrd_err_map (err_code);
 }
