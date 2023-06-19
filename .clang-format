@@ -147,7 +147,7 @@ SpacesInSquareBrackets: false
 SpaceBeforeSquareBrackets: false
 Standard:        Cpp03
 TabWidth:        8
-UseTab:          Always
+UseTab:          Never
 ForEachMacros:
   - 'FOR_EACH_IMPL'
   - 'list_for_each'
