@@ -23,10 +23,11 @@
 int
 timespec_getres (struct timespec *ts, int base)
 {
-  if (base == TIME_UTC)
+  clockid_t clockid = clock_from_timebase (base);
+  if (clockid >= 0)
     {
-      __clock_getres (CLOCK_REALTIME, ts);
-      return base;
+      if (__clock_getres (clockid, ts) >= 0)
+        return base;
     }
   return 0;
 }

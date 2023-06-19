@@ -23,10 +23,11 @@
 int
 __timespec_get64 (struct __timespec64 *ts, int base)
 {
-  if (base == TIME_UTC)
+  clockid_t clockid = clock_from_timebase (base);
+  if (clockid >= 0)
     {
-      __clock_gettime64 (CLOCK_REALTIME, ts);
-      return base;
+      if (__clock_gettime (clockid, ts) >= 0)
+        return base;
     }
   return 0;
 }

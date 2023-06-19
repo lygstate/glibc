@@ -361,6 +361,66 @@ in_time_t_range (__time64_t t)
   return s == t;
 }
 
+/* Helper that convert from c11 timebase to posix clockid_t,
+   when the mapping not exist, return -1 */
+static inline clockid_t
+clock_from_timebase (int timebase)
+{
+  clockid_t clockid = -1;
+  switch (timebase)
+    {
+    case TIME_UTC:
+      clockid = CLOCK_REALTIME;
+      break;
+    case TIME_MONOTONIC:
+      clockid = CLOCK_MONOTONIC;
+      break;
+    case TIME_ACTIVE:
+      clockid = CLOCK_PROCESS_CPUTIME_ID;
+      break;
+    case TIME_THREAD_ACTIVE:
+      clockid = CLOCK_THREAD_CPUTIME_ID;
+      break;
+    case TIME_MONOTONIC_RAW:
+      clockid = CLOCK_MONOTONIC_RAW;
+      break;
+    case TIME_UTC_COARSE:
+      clockid = CLOCK_REALTIME_COARSE;
+      break;
+    case TIME_MONOTONIC_COARSE:
+      clockid = CLOCK_MONOTONIC_COARSE;
+      break;
+#    ifdef CLOCK_BOOTTIME
+    case TIME_BOOTTIME:
+      clockid = CLOCK_BOOTTIME;
+      break;
+#    endif
+#    ifdef CLOCK_REALTIME_ALARM
+    case TIME_UTC_ALARM:
+      clockid = CLOCK_REALTIME_ALARM;
+      break;
+#    endif
+#    ifdef CLOCK_BOOTTIME_ALARM
+    case TIME_BOOTTIME_ALARM:
+      clockid = CLOCK_BOOTTIME_ALARM;
+      break;
+#    endif
+#    ifdef CLOCK_SGI_CYCLE
+    case TIME_SGI_CYCLE:
+      clockid = CLOCK_SGI_CYCLE;
+      break;
+#    endif
+#    ifdef CLOCK_TAI
+    case TIME_TAI:
+      clockid = CLOCK_TAI;
+      break;
+#    endif
+    default:
+      break;
+    }
+  return clockid;
+}
+
 /* Convert a known valid struct timeval into a struct __timespec64.  */
 static inline struct __timespec64
 valid_timeval_to_timespec64 (const struct timeval tv)

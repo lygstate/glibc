@@ -9,6 +9,19 @@ Version 2.38
 
 Major new features:
 
+* C23 timebase defines are supported, thse are:
+  TIME_MONOTONI
+  TIME_ACTIVE
+  TIME_THREAD_ACTIVE
+  TIME_MONOTONIC_RAW
+  TIME_UTC_COARSE
+  TIME_MONOTONIC_COARSE
+  TIME_BOOTTIME
+  TIME_UTC_ALARM
+  TIME_BOOTTIME_ALARM
+  TIME_SGI_CYCLE
+  TIME_TAI
+
 * When C2X features are enabled and the base argument is 0 or 2, the
   following functions support binary integers prefixed by 0b or 0B as
   input: strtol, strtoll, strtoul, strtoull, strtol_l, strtoll_l,

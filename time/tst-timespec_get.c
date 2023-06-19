@@ -34,6 +34,13 @@ do_test (void)
     TEST_VERIFY (ts.tv_nsec < 1000000000);
   }
 
+  {
+    struct timespec ts;
+    TEST_COMPARE (timespec_get (&ts, TIME_MONOTONIC), TIME_MONOTONIC);
+    TEST_VERIFY (ts.tv_nsec >= 0);
+    TEST_VERIFY (ts.tv_nsec < 1000000000);
+  }
+
   return 0;
 }
 
