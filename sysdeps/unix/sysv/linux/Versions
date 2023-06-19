@@ -321,6 +321,12 @@ libc {
     __ppoll64_chk;
 %endif
   }
+  GLIBC_2.38 {
+%ifdef TIME64_NON_DEFAULT
+    __cnd_timedwait_base64;
+    __mtx_timedlock_base64;
+%endif
+  }
   GLIBC_PRIVATE {
     # functions used in other libraries
     __syscall_rt_sigqueueinfo;

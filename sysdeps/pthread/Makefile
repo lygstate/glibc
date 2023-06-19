@@ -40,11 +40,13 @@ $(libpthread-routines-var) += \
   cnd_init \
   cnd_signal \
   cnd_timedwait \
+  cnd_timedwait_base \
   cnd_wait \
   mtx_destroy \
   mtx_init \
   mtx_lock \
   mtx_timedlock \
+  mtx_timedlock_base \
   mtx_trylock \
   mtx_unlock \
   pthread_atfork_compat \

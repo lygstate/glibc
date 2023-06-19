@@ -170,6 +170,11 @@ libpthread {
     sem_clockwait;
   }
 
+  GLIBC_2.38 {
+    cnd_timedwait_base;
+    mtx_timedlock_base;
+  }
+
   GLIBC_PRIVATE {
     __pthread_initialize_minimal;
 

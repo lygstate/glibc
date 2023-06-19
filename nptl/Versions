@@ -525,6 +525,11 @@ libpthread {
   GLIBC_2.31 {
     __libpthread_version_placeholder;
   }
+
+  GLIBC_2.38 {
+    cnd_timedwait_base;
+    mtx_timedlock_base;
+  }
 }
 
 ld {

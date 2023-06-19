@@ -146,14 +146,22 @@ extern int mtx_lock (mtx_t *__mutex);
 #ifndef __USE_TIME_BITS64
 extern int mtx_timedlock (mtx_t *__restrict __mutex,
 			  const struct timespec *__restrict __time_point);
+extern int mtx_timedlock_base (mtx_t *__restrict __mutex, int time_base,
+                               const struct timespec *__restrict __time_point);
 #else
 # ifdef __REDIRECT
 extern int __REDIRECT (mtx_timedlock, (mtx_t *__restrict __mutex,
                                        const struct timespec *__restrict
                                        __time_point),
                        __mtx_timedlock64);
+extern int __REDIRECT (mtx_timedlock_base, (mtx_t *__restrict __mutex,
+                                            int time_base,
+                                            const struct timespec *__restrict
+                                            __time_point),
+                       __mtx_timedlock_base64);
 # else
 #  define mtx_timedlock __mtx_timedlock64
+#  define mtx_timedlock_base __mtx_timedlock_base64
 # endif
 #endif
 
@@ -198,6 +206,9 @@ extern int cnd_wait (cnd_t *__cond, mtx_t *__mutex);
 extern int cnd_timedwait (cnd_t *__restrict __cond,
 			  mtx_t *__restrict __mutex,
 			  const struct timespec *__restrict __time_point);
+extern int cnd_timedwait_base (cnd_t *__restrict __cond,
+                               mtx_t *__restrict __mutex, int time_base,
+                               const struct timespec *__restrict __time_point);
 #else
 # ifdef __REDIRECT
 extern int __REDIRECT (cnd_timedwait, (cnd_t *__restrict __cond,
@@ -205,8 +216,15 @@ extern int __REDIRECT (cnd_timedwait, (cnd_t *__restrict __cond,
                                        const struct timespec *__restrict
                                        __time_point),
                        __cnd_timedwait64);
+extern int __REDIRECT (cnd_timedwait_base, (cnd_t *__restrict __cond,
+                                            mtx_t *__restrict __mutex,
+                                            int time_base,
+                                            const struct timespec *__restrict
+                                            __time_point),
+                       __cnd_timedwait_base64);
 # else
 #  define cnd_timedwait __cnd_timedwait64
+#  define cnd_timedwait_base __cnd_timedwait_base64
 # endif
 #endif
 
