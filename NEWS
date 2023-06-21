@@ -9,6 +9,16 @@ Version 2.38
 
 Major new features:
 
+* Extra timebase defines are supported, these are:
+  TIME_MONOTONIC_RAW
+  TIME_UTC_COARSE
+  TIME_MONOTONIC_COARSE
+  TIME_BOOTTIME
+  TIME_UTC_ALARM
+  TIME_BOOTTIME_ALARM
+  TIME_SGI_CYCLE
+  TIME_TAI
+
 * C2x timebase macro defines are supported, these are:
   TIME_MONOTONIC
   TIME_ACTIVE

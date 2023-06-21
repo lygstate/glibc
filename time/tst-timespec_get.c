@@ -28,6 +28,13 @@ test_timespec_get (int timebase)
     TEST_VERIFY (ts.tv_nsec < 1000000000);
 }
 
+static void
+test_timespec_get_not_support(int timebase)
+{
+    struct timespec ts;
+    TEST_COMPARE (timespec_get (&ts, timebase), 0);
+}
+
 static int
 do_test (void)
 {
@@ -41,6 +48,40 @@ do_test (void)
     test_timespec_get (TIME_MONOTONIC);
     test_timespec_get (TIME_ACTIVE);
     test_timespec_get (TIME_THREAD_ACTIVE);
+  }
+
+  {
+    test_timespec_get (TIME_MONOTONIC_RAW);
+    test_timespec_get (TIME_UTC_COARSE);
+    test_timespec_get (TIME_MONOTONIC_COARSE);
+  }
+
+  {
+#ifdef CLOCK_BOOTTIME
+    test_timespec_get (TIME_BOOTTIME);
+#else
+    test_timespec_get_not_support (TIME_BOOTTIME);
+#endif
+#ifdef CLOCK_REALTIME_ALARM
+    test_timespec_get (TIME_UTC_ALARM);
+#else
+    test_timespec_get_not_support (TIME_UTC_ALARM);
+#endif
+#ifdef CLOCK_BOOTTIME_ALARM
+    test_timespec_get (TIME_BOOTTIME_ALARM);
+#else
+    test_timespec_get_not_support (TIME_BOOTTIME_ALARM);
+#endif
+#ifdef CLOCK_SGI_CYCLE
+    test_timespec_get (TIME_SGI_CYCLE);
+#else
+    test_timespec_get_not_support (TIME_SGI_CYCLE);
+#endif
+#ifdef CLOCK_TAI
+    test_timespec_get (TIME_TAI);
+#else
+    test_timespec_get_not_support (TIME_TAI);
+#endif
   }
 
   return 0;

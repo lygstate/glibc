@@ -69,6 +69,16 @@ typedef __pid_t pid_t;
 # define TIME_ACTIVE             3
 # define TIME_THREAD_ACTIVE      4
 #endif
+#ifdef __USE_GNU
+# define TIME_MONOTONIC_RAW      5
+# define TIME_UTC_COARSE         6
+# define TIME_MONOTONIC_COARSE   7
+# define TIME_BOOTTIME           8
+# define TIME_UTC_ALARM          9
+# define TIME_BOOTTIME_ALARM     10
+# define TIME_SGI_CYCLE          11
+# define TIME_TAI                12
+#endif
 
 __BEGIN_DECLS
 

@@ -54,6 +54,41 @@ do_test (void)
     test_timespec_getres (CLOCK_THREAD_CPUTIME_ID, TIME_THREAD_ACTIVE);
   }
 
+  {
+    test_timespec_getres (CLOCK_MONOTONIC_RAW, TIME_MONOTONIC_RAW);
+    test_timespec_getres (CLOCK_REALTIME_COARSE, TIME_UTC_COARSE);
+    test_timespec_getres (CLOCK_MONOTONIC_COARSE, TIME_MONOTONIC_COARSE);
+  }
+
+  {
+    struct timespec ts;
+#ifdef CLOCK_BOOTTIME
+    test_timespec_getres (CLOCK_BOOTTIME, TIME_BOOTTIME);
+#else
+    TEST_COMPARE (timespec_getres (&ts, TIME_BOOTTIME), 0);
+#endif
+#ifdef CLOCK_REALTIME_ALARM
+    test_timespec_getres (CLOCK_REALTIME_ALARM, TIME_UTC_ALARM);
+#else
+    TEST_COMPARE (timespec_getres (&ts, TIME_UTC_ALARM), 0);
+#endif
+#ifdef CLOCK_BOOTTIME_ALARM
+    test_timespec_getres (CLOCK_BOOTTIME_ALARM, TIME_BOOTTIME_ALARM);
+#else
+    TEST_COMPARE (timespec_getres (&ts, TIME_BOOTTIME_ALARM), 0);
+#endif
+#ifdef CLOCK_SGI_CYCLE
+    test_timespec_getres (CLOCK_SGI_CYCLE, TIME_SGI_CYCLE);
+#else
+    TEST_COMPARE (timespec_getres (&ts, TIME_SGI_CYCLE), 0);
+#endif
+#ifdef CLOCK_TAI
+    test_timespec_getres (CLOCK_TAI, TIME_TAI);
+#else
+    TEST_COMPARE (timespec_getres (&ts, TIME_TAI), 0);
+#endif
+  }
+
   return 0;
 }
 

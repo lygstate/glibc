@@ -381,6 +381,40 @@ clock_from_timebase (int timebase)
     case TIME_THREAD_ACTIVE:
       clockid = CLOCK_THREAD_CPUTIME_ID;
       break;
+    case TIME_MONOTONIC_RAW:
+      clockid = CLOCK_MONOTONIC_RAW;
+      break;
+    case TIME_UTC_COARSE:
+      clockid = CLOCK_REALTIME_COARSE;
+      break;
+    case TIME_MONOTONIC_COARSE:
+      clockid = CLOCK_MONOTONIC_COARSE;
+      break;
+#    ifdef CLOCK_BOOTTIME
+    case TIME_BOOTTIME:
+      clockid = CLOCK_BOOTTIME;
+      break;
+#    endif
+#    ifdef CLOCK_REALTIME_ALARM
+    case TIME_UTC_ALARM:
+      clockid = CLOCK_REALTIME_ALARM;
+      break;
+#    endif
+#    ifdef CLOCK_BOOTTIME_ALARM
+    case TIME_BOOTTIME_ALARM:
+      clockid = CLOCK_BOOTTIME_ALARM;
+      break;
+#    endif
+#    ifdef CLOCK_SGI_CYCLE
+    case TIME_SGI_CYCLE:
+      clockid = CLOCK_SGI_CYCLE;
+      break;
+#    endif
+#    ifdef CLOCK_TAI
+    case TIME_TAI:
+      clockid = CLOCK_TAI;
+      break;
+#    endif
     default:
       break;
     }
