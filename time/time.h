@@ -62,7 +62,12 @@ typedef __pid_t pid_t;
 
 #ifdef __USE_ISOC11
 /* Time base values for timespec_get.  */
-# define TIME_UTC 1
+# define TIME_UTC                1
+#endif
+#if __GLIBC_USE_ISOC2X
+# define TIME_MONOTONIC          2
+# define TIME_ACTIVE             3
+# define TIME_THREAD_ACTIVE      4
 #endif
 
 __BEGIN_DECLS

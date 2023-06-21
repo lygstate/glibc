@@ -361,6 +361,32 @@ in_time_t_range (__time64_t t)
   return s == t;
 }
 
+/* Helper that convert from c11 timebase to posix clockid_t,
+   when the mapping not exist, return -1 */
+static inline clockid_t
+clock_from_timebase (int timebase)
+{
+  clockid_t clockid = -1;
+  switch (timebase)
+    {
+    case TIME_UTC:
+      clockid = CLOCK_REALTIME;
+      break;
+    case TIME_MONOTONIC:
+      clockid = CLOCK_MONOTONIC;
+      break;
+    case TIME_ACTIVE:
+      clockid = CLOCK_PROCESS_CPUTIME_ID;
+      break;
+    case TIME_THREAD_ACTIVE:
+      clockid = CLOCK_THREAD_CPUTIME_ID;
+      break;
+    default:
+      break;
+    }
+  return clockid;
+}
+
 /* Convert a known valid struct timeval into a struct __timespec64.  */
 static inline struct __timespec64
 valid_timeval_to_timespec64 (const struct timeval tv)

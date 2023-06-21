@@ -9,6 +9,11 @@ Version 2.38
 
 Major new features:
 
+* C2x timebase macro defines are supported, these are:
+  TIME_MONOTONIC
+  TIME_ACTIVE
+  TIME_THREAD_ACTIVE
+
 * When C2X features are enabled and the base argument is 0 or 2, the
   following functions support binary integers prefixed by 0b or 0B as
   input: strtol, strtoll, strtoul, strtoull, strtol_l, strtoll_l,
